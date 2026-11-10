@@ -1,0 +1,16 @@
+{
+  "name": "local-qr-transfer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline file transfer through animated QR codes, built as one self-contained HTML file.",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "qrcode": "1.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
