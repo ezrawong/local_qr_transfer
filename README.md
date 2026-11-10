@@ -1,5 +1,8 @@
 # 光傳 · Local QR Transfer
 
+**▶ Try it now (no download needed): <https://ezrawong.github.io/local_qr_transfer/dist/>**
+**▶ 即開即用（無需下載）：<https://ezrawong.github.io/local_qr_transfer/dist/>**
+
 ## Screenshots
 
 | Send file · 傳送檔案 | Receive file · 接收檔案 |
@@ -37,6 +40,8 @@ npm.cmd run build
 ```
 
 The build output is **`dist/index.html`**. Copy that file to both computers and open it in a browser. The HTML is self-contained; you do not need to copy `node_modules` or install Node.js on either computer.
+
+**Hosted version:** You can also skip building entirely and open the ready-to-use version at <https://ezrawong.github.io/local_qr_transfer/dist/> on both computers.
 
 Camera access depends on browser security rules. Chrome and Edge usually allow camera access from `file://`, but this is not guaranteed by every system or organization. If the camera is unavailable, serve the file from a trusted HTTPS or localhost origin, or receive by importing QR screenshots. For example, with Python installed, run `python -m http.server 8000` from the project directory and open `http://localhost:8000/dist/` in the browser.
 
@@ -123,6 +128,8 @@ npm.cmd run build
 ```
 
 建置產物是 **`dist/index.html`**。將此檔案複製到兩部電腦，並用瀏覽器開啟。HTML 已包含所需內容，不必複製 `node_modules`，使用端亦毋須安裝 Node.js。
+
+**線上版本：** 亦可完全略過建置，直接在兩部電腦開啟即用版本：<https://ezrawong.github.io/local_qr_transfer/dist/>
 
 鏡頭存取受瀏覽器安全政策限制。Chrome 和 Edge 通常允許從 `file://` 開啟鏡頭，但不同系統或機構政策未必一樣。若無法使用鏡頭，請從可信的 HTTPS 或 localhost 網址開啟，或改為匯入 QR 截圖接收。例如，若已安裝 Python，可在專案目錄執行 `python -m http.server 8000`，然後用瀏覽器開啟 `http://localhost:8000/dist/`。
 
