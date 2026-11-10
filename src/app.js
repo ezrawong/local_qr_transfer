@@ -3,6 +3,7 @@
 const QRCode = require('qrcode/lib/core/qrcode');
 const { decodeImage } = require('./qr-decoder');
 const { MAX_FILE_SIZE, encodeManifest, encodePacket, parsePacket, Receiver, sha256 } = require('./protocol');
+const { t, getLang, setLang, applyStatic } = require('./i18n');
 const $ = id => document.getElementById(id);
 const receiver = new Receiver();
 const scanCanvas = document.createElement('canvas');
@@ -43,7 +44,7 @@ function pauseSender() {
   playing = false;
   clearTimeout(playTimer);
   playTimer = null;
-  $('play').textContent = '開始播放';
+  $('play').textContent = t('play_start');
 }
 
 function selectFile(file) {
@@ -59,10 +60,10 @@ function selectFile(file) {
   $('qr-canvas').hidden = true;
   $('qr-placeholder').hidden = false;
   $('send-progress').value = 0;
-  $('send-counter').textContent = '等待產生 QR';
-  $('send-details').textContent = '循環傳送 · 自動分段';
-  $('file-info').textContent = file ? `${file.name} · ${formatSize(file.size)}` : '未選擇檔案';
-  status('send-status', file && file.size > MAX_FILE_SIZE ? '檔案超過 64 MiB 上限。請選擇較細檔案。' : '揀好編碼設定後，按「產生 QR」。', file && file.size > MAX_FILE_SIZE ? 'error' : '');
+  $('send-counter').textContent = t('send_waiting_generate');
+  $('send-details').textContent = t('send_details_loop');
+  $('file-info').textContent = file ? `${file.name} · ${formatSize(file.size)}` : t('file_none');
+  status('send-status', file && file.size > MAX_FILE_SIZE ? t('file_too_large') : t('send_status_pick_settings'), file && file.size > MAX_FILE_SIZE ? 'error' : '');
 }
 
 function packetAt(index) {
@@ -94,9 +95,10 @@ function renderQR() {
   }
   canvas.hidden = false;
   $('qr-placeholder').hidden = true;
-  $('send-counter').textContent = `第 ${send.index + 1} / ${send.total} 段 · 第 ${send.round} 輪`;
+  $('send-counter').textContent = t('send_counter_segment', send.index + 1, send.total, send.round);
   const seconds = send.total / Number($('frequency').value);
-  $('send-details').textContent = `QR v${qr.version} · ${modules} × ${modules} · 每輪約 ${seconds < 60 ? `${seconds.toFixed(1)} 秒` : `${(seconds / 60).toFixed(1)} 分鐘`}`;
+  const time = seconds < 60 ? t('time_seconds', seconds.toFixed(1)) : t('time_minutes', (seconds / 60).toFixed(1));
+  $('send-details').textContent = t('send_details_qr', qr.version, modules, time);
   $('send-progress').max = send.total;
   $('send-progress').value = send.index + 1;
   $('jump-index').value = send.index + 1;
@@ -114,7 +116,7 @@ function scheduleFrame() {
       scheduleFrame();
     } catch (error) {
       pauseSender();
-      status('send-status', `無法產生 QR：${errorMessage(error)}。請減少每段資料量或降低容錯率。`, 'error');
+      status('send-status', t('qr_fail_generate', errorMessage(error)), 'error');
     }
   }, 1000 / Number($('frequency').value));
 }
@@ -131,7 +133,7 @@ async function prepareSender() {
   $('qr-canvas').hidden = true;
   $('qr-placeholder').hidden = false;
   $('encoding-settings').disabled = true;
-  status('send-status', '正在讀取檔案及計算 SHA-256…');
+  status('send-status', t('reading_hashing'));
   try {
     const bytes = new Uint8Array(await file.arrayBuffer());
     const hash = await sha256(bytes);
@@ -159,11 +161,11 @@ async function prepareSender() {
     $('play').disabled = false;
     $('jump').disabled = false;
     $('jump-index').disabled = false;
-    status('send-status', 'QR 已準備好。接收端開啟鏡頭後，按「開始播放」。');
+    status('send-status', t('qr_ready'));
   } catch (error) {
     if (epoch !== sendEpoch) return;
     send = null;
-    status('send-status', `無法準備檔案：${errorMessage(error)}。如 QR 容量不足，請減少每段資料量、降低容錯率或縮短檔名。`, 'error');
+    status('send-status', t('prepare_fail', errorMessage(error)), 'error');
   } finally {
     if (epoch === sendEpoch) {
       $('prepare').disabled = false;
@@ -173,12 +175,12 @@ async function prepareSender() {
 }
 
 function updateReceiveProgress() {
-  $('receive-counter').textContent = `${receiver.received} / ${receiver.total} 段`;
+  $('receive-counter').textContent = t('receive_counter', receiver.received, receiver.total);
   $('receive-percent').textContent = `${receiver.total ? (receiver.received * 100 / receiver.total).toFixed(1) : '0'}%`;
   $('receive-progress').max = receiver.total || 1;
   $('receive-progress').value = receiver.received;
-  $('receive-file').textContent = receiver.meta ? `${receiver.meta.name} · ${formatSize(receiver.meta.size)}` : '等待第一個 QR';
-  $('missing').textContent = receiver.total && receiver.received < receiver.total ? `尚欠段數：${receiver.missingRanges()}（可於傳送端跳轉）` : '';
+  $('receive-file').textContent = receiver.meta ? `${receiver.meta.name} · ${formatSize(receiver.meta.size)}` : t('recv_file_waiting');
+  $('missing').textContent = receiver.total && receiver.received < receiver.total ? t('missing_segments', receiver.missingRanges()) : '';
 }
 
 function scanMessage(text, kind = '') {
@@ -195,22 +197,22 @@ async function consume(text) {
   try {
     packet = parsePacket(text);
   } catch (error) {
-    scanMessage(`忽略損壞或不支援嘅 QR：${errorMessage(error)}`, 'error');
+    scanMessage(t('ignore_bad_qr', errorMessage(error)), 'error');
     return false;
   }
   if (!packet) return false;
   const result = receiver.accept(packet);
   if (result.foreign) {
-    scanMessage('偵測到另一個傳送。為免混合檔案，已忽略；如要接收新檔案，請先清除接收進度。', 'error');
+    scanMessage(t('foreign_transfer'), 'error');
     return true;
   }
   if (!result.added) return true;
   updateReceiveProgress();
-  status('receive-status', `接收中 · 已讀取 ${formatSize(receiver.bytes)}。遺漏嘅段會喺下一輪補齊。`);
+  status('receive-status', t('receiving', formatSize(receiver.bytes)));
   if (result.complete) {
     finishing = true;
     const epoch = receiveEpoch;
-    status('receive-status', '所有段已收到，正在驗證 SHA-256…');
+    status('receive-status', t('all_received_verify'));
     try {
       const bytes = receiver.assemble();
       const expected = receiver.meta.hash;
@@ -219,7 +221,7 @@ async function consume(text) {
       if (epoch !== receiveEpoch) return true;
       if (hash !== expected) {
         stopCamera();
-        status('receive-status', 'SHA-256 不一致，檔案已拒絕下載。請清除接收進度後重新傳送。', 'error');
+        status('receive-status', t('hash_mismatch'), 'error');
         completed = true;
         return true;
       }
@@ -230,12 +232,12 @@ async function consume(text) {
       $('download').hidden = false;
       completed = true;
       stopCamera();
-      status('receive-status', `接收完成，SHA-256 驗證一致。\n${hash}\n請按「下載檔案」儲存；只開啟可信來源嘅檔案。`, 'success');
+      status('receive-status', t('receive_complete', hash), 'success');
     } catch (error) {
       if (epoch === receiveEpoch) {
         completed = true;
         stopCamera();
-        status('receive-status', `組合檔案失敗：${errorMessage(error)}。請清除接收進度再試。`, 'error');
+        status('receive-status', t('assemble_fail', errorMessage(error)), 'error');
       }
     } finally {
       if (epoch === receiveEpoch) finishing = false;
@@ -254,7 +256,7 @@ function resetReceiver() {
   $('download').hidden = true;
   $('download').removeAttribute('href');
   updateReceiveProgress();
-  status('receive-status', '接收進度已清除，可以接收新檔案。');
+  status('receive-status', t('progress_cleared'));
 }
 
 async function configureDecoder() {
@@ -268,8 +270,8 @@ async function configureDecoder() {
       scanMode = 'native';
     }
   }
-  if (wanted === 'native' && !detector) throw new Error('呢個瀏覽器未提供原生 QR BarcodeDetector。請選「自動」或「本地自寫解碼器」。');
-  $('decoder-info').textContent = scanMode === 'native' ? '目前使用瀏覽器原生 QR 掃描器；所有影像只喺本機處理。' : '目前使用本地自寫 QR 解碼器。請保持鏡頭正面及清晰，建議 2–4 QR/s。';
+  if (wanted === 'native' && !detector) throw new Error(t('native_unavailable'));
+  $('decoder-info').textContent = scanMode === 'native' ? t('decoder_native') : t('decoder_local');
 }
 
 function drawScanSource(source, width, height) {
@@ -303,10 +305,10 @@ async function scanFrame(epoch) {
     if (scanMode === 'native' && $('scanner-mode').value === 'auto') {
       detector = null;
       scanMode = 'local';
-      $('decoder-info').textContent = `原生掃描失敗，已切換本地解碼器：${errorMessage(error)}`;
+      $('decoder-info').textContent = t('native_fail_switch', errorMessage(error));
     } else {
       stopCamera();
-      status('receive-status', `掃描失敗：${errorMessage(error)}`, 'error');
+      status('receive-status', t('scan_fail', errorMessage(error)), 'error');
     }
   } finally {
     if (stream && epoch === cameraEpoch) scanTimer = setTimeout(() => scanFrame(epoch), 60);
@@ -326,13 +328,13 @@ function stopCamera() {
   $('camera-select').disabled = false;
   $('camera-resolution').disabled = false;
   $('scanner-mode').disabled = false;
-  $('camera-state').textContent = '鏡頭未開啟';
+  $('camera-state').textContent = t('camera_off');
 }
 
 async function startCamera() {
   stopCamera();
   if (completed) {
-    status('receive-status', '上一個接收已完成或已拒絕。請先下載檔案或清除接收進度，再開啟新接收。');
+    status('receive-status', t('prev_receive_done'));
     return;
   }
   const epoch = cameraEpoch;
@@ -340,10 +342,10 @@ async function startCamera() {
   $('camera-select').disabled = true;
   $('camera-resolution').disabled = true;
   $('scanner-mode').disabled = true;
-  status('receive-status', '正在要求鏡頭權限…');
+  status('receive-status', t('requesting_camera'));
   try {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      throw new Error('目前環境無法使用 camera API。請改用支援鏡頭嘅 Chrome / Edge，並經 HTTPS／localhost 開啟，或匯入 QR 截圖。');
+      throw new Error(t('camera_api_unavailable'));
     }
     await configureDecoder();
     if (epoch !== cameraEpoch) return;
@@ -369,27 +371,27 @@ async function startCamera() {
     $('stop-camera').disabled = false;
     const track = stream.getVideoTracks()[0];
     const settings = track.getSettings();
-    $('camera-state').textContent = `${settings.width || '?'} × ${settings.height || '?'}`;
+    $('camera-state').textContent = t('camera_state_res', settings.width || '?', settings.height || '?');
     track.addEventListener('ended', () => {
       if (epoch === cameraEpoch) {
         stopCamera();
-        status('receive-status', '鏡頭已中斷；接收進度仍保留，可以重新開啟鏡頭。', 'error');
+        status('receive-status', t('camera_interrupted'), 'error');
       }
     });
-    status('receive-status', '鏡頭已開啟，請對準傳送端 QR。');
+    status('receive-status', t('camera_opened'));
     scanFrame(epoch);
     const devices = await navigator.mediaDevices.enumerateDevices();
     if (epoch !== cameraEpoch) return;
-    $('camera-select').replaceChildren(new Option('預設鏡頭', ''));
+    $('camera-select').replaceChildren(new Option(t('default_camera'), ''));
     for (const device of devices.filter(item => item.kind === 'videoinput')) {
-      $('camera-select').add(new Option(device.label || `鏡頭 ${$('camera-select').length}`, device.deviceId));
+      $('camera-select').add(new Option(device.label || t('camera_n', $('camera-select').length), device.deviceId));
     }
     $('camera-select').value = settings.deviceId || '';
   } catch (error) {
     if (epoch !== cameraEpoch) return;
     stopCamera();
-    const hint = error.name === 'NotAllowedError' ? '請允許鏡頭權限；如直接開 HTML 被封鎖，請改經 HTTPS／localhost 開啟。' : '';
-    status('receive-status', `無法開啟鏡頭：${errorMessage(error)} ${hint}`, 'error');
+    const hint = error.name === 'NotAllowedError' ? t('camera_permission_hint') : '';
+    status('receive-status', t('camera_open_fail', errorMessage(error), hint), 'error');
   }
 }
 
@@ -404,10 +406,10 @@ async function importImages(files) {
     let found = 0;
     for (const file of files) {
       if (epoch !== receiveEpoch || completed) break;
-      if (file.size > 32 * 1024 * 1024) throw new Error(`圖片 ${file.name} 超過 32 MiB 上限。`);
+      if (file.size > 32 * 1024 * 1024) throw new Error(t('image_too_large', file.name));
       const image = await createImageBitmap(file);
       try {
-        if (image.width * image.height > 32 * 1024 * 1024) throw new Error('圖片解析度過大，請先裁剪 QR 範圍。');
+        if (image.width * image.height > 32 * 1024 * 1024) throw new Error(t('image_resolution_large'));
         drawScanSource(image, image.width, image.height);
         const texts = await readCanvas();
         if (epoch !== receiveEpoch) break;
@@ -417,10 +419,10 @@ async function importImages(files) {
       }
     }
     if (epoch === receiveEpoch && !completed && !finishing && found === 0) {
-      status('receive-status', '未能讀到有效傳送 QR。請確認圖片完整、清晰，並保留 QR 白邊。', 'error');
+      status('receive-status', t('no_valid_qr'), 'error');
     }
   } catch (error) {
-    if (epoch === receiveEpoch) status('receive-status', `匯入圖片失敗：${errorMessage(error)}`, 'error');
+    if (epoch === receiveEpoch) status('receive-status', t('import_fail', errorMessage(error)), 'error');
   } finally {
     $('image-input').disabled = false;
     $('image-input').value = '';
@@ -458,25 +460,25 @@ $('play').addEventListener('click', () => {
   if (playing) pauseSender();
   else {
     playing = true;
-    $('play').textContent = '暫停播放';
-    status('send-status', '循環播放中；呢度唔會知道對方是否收齊，請留意接收端進度。');
+    $('play').textContent = t('play_pause');
+    status('send-status', t('loop_playing'));
     scheduleFrame();
   }
 });
 $('frequency').addEventListener('input', () => {
-  $('frequency-value').textContent = `${$('frequency').value} QR/s`;
+  $('frequency-value').textContent = t('freq_unit', $('frequency').value);
   if (send) renderQR();
   scheduleFrame();
 });
 $('qr-size').addEventListener('input', () => {
-  $('qr-size-value').textContent = `${$('qr-size').value} px`;
+  $('qr-size-value').textContent = t('px_unit', $('qr-size').value);
   if (send) renderQR();
 });
 $('jump').addEventListener('click', () => {
   if (!send) return;
   const index = Number($('jump-index').value);
   if (!Number.isInteger(index) || index < 1 || index > send.total) {
-    status('send-status', `請輸入 1 至 ${send.total} 嘅整數。`, 'error');
+    status('send-status', t('jump_range', send.total), 'error');
     return;
   }
   send.index = index - 1;
@@ -487,15 +489,15 @@ $('fullscreen').addEventListener('click', async () => {
   try {
     if (document.fullscreenElement) await document.exitFullscreen();
     else if ($('qr-stage').requestFullscreen) await $('qr-stage').requestFullscreen();
-    else status('send-status', '呢個瀏覽器未提供全螢幕功能，請用瀏覽器全螢幕模式。', 'error');
+    else status('send-status', t('fullscreen_unavailable'), 'error');
   } catch (error) {
-    status('send-status', `無法進入全螢幕：${errorMessage(error)}`, 'error');
+    status('send-status', t('fullscreen_fail', errorMessage(error)), 'error');
   }
 });
 $('start-camera').addEventListener('click', startCamera);
 $('stop-camera').addEventListener('click', stopCamera);
 $('reset-receiver').addEventListener('click', () => {
-  if (receiver.received && !globalThis.confirm('清除所有已接收資料及下載連結？')) return;
+  if (receiver.received && !globalThis.confirm(t('confirm_clear'))) return;
   resetReceiver();
 });
 $('image-input').addEventListener('change', event => importImages(Array.from(event.target.files)));
@@ -507,4 +509,25 @@ window.addEventListener('pagehide', () => {
   pauseSender();
   stopCamera();
   if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+});
+
+// Re-render dynamic strings (progress, unit labels, counters) after a language switch.
+function refreshDynamic() {
+  $('frequency-value').textContent = t('freq_unit', $('frequency').value);
+  $('qr-size-value').textContent = t('px_unit', $('qr-size').value);
+  updateReceiveProgress();
+  if (!send) {
+    const file = $('file-input').files[0];
+    $('file-info').textContent = file ? `${file.name} · ${formatSize(file.size)}` : t('file_none');
+    $('send-counter').textContent = t('send_waiting_generate');
+    $('send-details').textContent = t('send_details_loop');
+  }
+  $('play').textContent = playing ? t('play_pause') : t('play_start');
+}
+
+// Language toggle: zh <-> en, persisted and applied to the whole page.
+applyStatic();
+refreshDynamic();
+$('lang-toggle').addEventListener('click', () => {
+  setLang(getLang() === 'zh' ? 'en' : 'zh', refreshDynamic);
 });

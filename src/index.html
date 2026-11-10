@@ -10,77 +10,80 @@
 </head>
 <body>
   <header>
-    <div class="brand"><span class="logo" aria-hidden="true">▦</span><div><h1>光傳 <span>QR Transfer</span></h1><p>一個檔案，一束光。唔經網絡，唔上雲端。</p></div></div>
-    <span class="local-badge">● 100% LOCAL</span>
+    <div class="brand"><span class="logo" aria-hidden="true">▦</span><div><h1>光傳 <span>QR Transfer</span></h1><p data-i18n="tagline">一個檔案，一束光。唔經網絡，唔上雲端。</p></div></div>
+    <div class="header-actions">
+      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="切換語言 / Switch language">EN</button>
+      <span class="local-badge">● 100% LOCAL</span>
+    </div>
   </header>
   <main>
-    <nav aria-label="功能" class="tabs">
-      <button id="send-tab" aria-controls="send-panel" aria-pressed="true">↗ 傳送檔案</button>
-      <button id="receive-tab" aria-controls="receive-panel" aria-pressed="false">↙ 接收檔案</button>
+    <nav data-i18n-aria="nav_label" aria-label="功能" class="tabs">
+      <button id="send-tab" aria-controls="send-panel" aria-pressed="true" data-i18n="send_tab">↗ 傳送檔案</button>
+      <button id="receive-tab" aria-controls="receive-panel" aria-pressed="false" data-i18n="receive_tab">↙ 接收檔案</button>
     </nav>
     <section id="send-panel" aria-labelledby="send-tab">
-      <div class="intro"><h2>將檔案變成動態 QR</h2><p>另一部電腦開啟同一個 HTML，選「接收檔案」，對準螢幕即可。</p></div>
+      <div class="intro"><h2 data-i18n="send_h2">將檔案變成動態 QR</h2><p data-i18n="send_intro">另一部電腦開啟同一個 HTML，選「接收檔案」，對準螢幕即可。</p></div>
       <div class="workspace">
         <div class="controls card">
           <label class="file-picker" id="drop-zone">
             <span class="file-icon" aria-hidden="true">＋</span>
-            <strong>揀選或拖放檔案</strong><span>任何格式 · 最大 64 MiB</span>
+            <strong data-i18n="drop_strong">揀選或拖放檔案</strong><span data-i18n="drop_hint">任何格式 · 最大 64 MiB</span>
             <input id="file-input" type="file">
           </label>
-          <p id="file-info" class="file-info">未選擇檔案</p>
+          <p id="file-info" class="file-info" data-i18n="file_none">未選擇檔案</p>
           <fieldset id="encoding-settings">
-            <legend>編碼設定</legend>
-            <label>每段資料量 <span>較細較易掃描</span><select id="chunk-size"><option value="64">64 bytes</option><option value="128">128 bytes</option><option value="256" selected>256 bytes</option><option value="512">512 bytes</option><option value="768">768 bytes</option><option value="1024">1024 bytes</option></select></label>
-            <label>容錯率 <select id="ecc"><option value="L">L · 約 7%</option><option value="M" selected>M · 約 15%</option><option value="Q">Q · 約 25%</option><option value="H">H · 約 30%</option></select></label>
+            <legend data-i18n="enc_legend">編碼設定</legend>
+            <label><span data-i18n="chunk_label">每段資料量</span> <span data-i18n="chunk_hint">較細較易掃描</span><select id="chunk-size"><option value="64">64 bytes</option><option value="128">128 bytes</option><option value="256" selected>256 bytes</option><option value="512">512 bytes</option><option value="768">768 bytes</option><option value="1024">1024 bytes</option></select></label>
+            <label><span data-i18n="ecc_label">容錯率</span> <select id="ecc"><option value="L" data-i18n="ecc_l">L · 約 7%</option><option value="M" selected data-i18n="ecc_m">M · 約 15%</option><option value="Q" data-i18n="ecc_q">Q · 約 25%</option><option value="H" data-i18n="ecc_h">H · 約 30%</option></select></label>
           </fieldset>
           <fieldset>
-            <legend>播放設定 <span>可即時調整</span></legend>
-            <label for="frequency">切換頻率 <output id="frequency-value">4 QR/s</output></label>
+            <legend><span data-i18n="play_legend">播放設定</span> <span data-i18n="play_hint">可即時調整</span></legend>
+            <label for="frequency"><span data-i18n="freq_label">切換頻率</span> <output id="frequency-value">4 QR/s</output></label>
             <input id="frequency" type="range" min="1" max="15" value="4" step="1">
-            <label for="qr-size">QR 解析度 <output id="qr-size-value">640 px</output></label>
+            <label for="qr-size"><span data-i18n="qrsize_label">QR 解析度</span> <output id="qr-size-value">640 px</output></label>
             <input id="qr-size" type="range" min="256" max="1200" value="640" step="16">
           </fieldset>
-          <div class="actions"><button id="prepare" class="primary" disabled>產生 QR</button><button id="play" disabled>開始播放</button></div>
-          <label class="jump-label">跳到指定段（由 1 開始）<div class="inline"><input id="jump-index" type="number" min="1" value="1" disabled><button id="jump" disabled>跳轉</button></div></label>
-          <p class="hint">QR 會循環播放；接收端會去除重複段。接收端完成後先停止傳送。大型檔案會需要較長時間。</p>
+          <div class="actions"><button id="prepare" class="primary" disabled data-i18n="prepare">產生 QR</button><button id="play" disabled data-i18n="play_start">開始播放</button></div>
+          <label class="jump-label"><span data-i18n="jump_label">跳到指定段（由 1 開始）</span><div class="inline"><input id="jump-index" type="number" min="1" value="1" disabled><button id="jump" disabled data-i18n="jump_btn">跳轉</button></div></label>
+          <p class="hint" data-i18n="send_hint_loop">QR 會循環播放；接收端會去除重複段。接收端完成後先停止傳送。大型檔案會需要較長時間。</p>
         </div>
         <div class="card display-card">
-          <div class="card-heading"><strong>傳送畫面</strong><button id="fullscreen">全螢幕</button></div>
-          <div id="qr-stage" class="qr-stage"><div id="qr-placeholder" class="placeholder"><span aria-hidden="true">▦</span><p>準備好檔案後，QR 會顯示喺呢度</p></div><canvas id="qr-canvas" hidden aria-label="檔案傳送 QR code"></canvas></div>
-          <div class="transfer-info"><strong id="send-counter">等待檔案</strong><span id="send-details">循環傳送 · 自動分段</span></div>
-          <progress id="send-progress" value="0" max="1" aria-label="目前播放段"></progress>
-          <p id="send-status" class="status" role="status">所有處理只會喺呢個瀏覽器進行。</p>
+          <div class="card-heading"><strong data-i18n="send_display">傳送畫面</strong><button id="fullscreen" data-i18n="fullscreen">全螢幕</button></div>
+          <div id="qr-stage" class="qr-stage"><div id="qr-placeholder" class="placeholder"><span aria-hidden="true">▦</span><p data-i18n="qr_placeholder">準備好檔案後，QR 會顯示喺呢度</p></div><canvas id="qr-canvas" hidden data-i18n-aria="qr_canvas_aria" aria-label="檔案傳送 QR code"></canvas></div>
+          <div class="transfer-info"><strong id="send-counter" data-i18n="send_waiting">等待檔案</strong><span id="send-details" data-i18n="send_details_loop">循環傳送 · 自動分段</span></div>
+          <progress id="send-progress" value="0" max="1" data-i18n-aria="send_progress_aria" aria-label="目前播放段"></progress>
+          <p id="send-status" class="status" role="status" data-i18n="send_status_local">所有處理只會喺呢個瀏覽器進行。</p>
         </div>
       </div>
     </section>
     <section id="receive-panel" aria-labelledby="receive-tab" hidden>
-      <div class="intro"><h2>用鏡頭接收檔案</h2><p>對準另一部電腦嘅 QR；即使漏咗幾段，下一輪都會自動補齊。</p></div>
+      <div class="intro"><h2 data-i18n="recv_h2">用鏡頭接收檔案</h2><p data-i18n="recv_intro">對準另一部電腦嘅 QR；即使漏咗幾段，下一輪都會自動補齊。</p></div>
       <div class="workspace">
         <div class="controls card">
-          <label>鏡頭 <select id="camera-select"><option value="">預設鏡頭</option></select></label>
-          <label>鏡頭解析度 <select id="camera-resolution"><option value="1280">1280 × 720</option><option value="1920" selected>1920 × 1080</option><option value="640">640 × 480</option></select></label>
-          <label>掃描方式 <select id="scanner-mode"><option value="auto">自動 · 原生優先</option><option value="local">本地自寫解碼器</option><option value="native">只用瀏覽器原生</option></select></label>
-          <div class="actions"><button id="start-camera" class="primary">開啟鏡頭</button><button id="stop-camera" disabled>停止</button></div>
-          <p id="decoder-info" class="hint">原生 BarcodeDetector 或本地解碼，無需下載任何掃描 library。</p>
+          <label><span data-i18n="camera_label">鏡頭</span> <select id="camera-select"><option value="" data-i18n="default_camera">預設鏡頭</option></select></label>
+          <label><span data-i18n="camera_res_label">鏡頭解析度</span> <select id="camera-resolution"><option value="1280">1280 × 720</option><option value="1920" selected>1920 × 1080</option><option value="640">640 × 480</option></select></label>
+          <label><span data-i18n="scanner_mode_label">掃描方式</span> <select id="scanner-mode"><option value="auto" data-i18n="scan_auto">自動 · 原生優先</option><option value="local" data-i18n="scan_local">本地自寫解碼器</option><option value="native" data-i18n="scan_native">只用瀏覽器原生</option></select></label>
+          <div class="actions"><button id="start-camera" class="primary" data-i18n="start_camera">開啟鏡頭</button><button id="stop-camera" disabled data-i18n="stop_camera">停止</button></div>
+          <p id="decoder-info" class="hint" data-i18n="decoder_info_init">原生 BarcodeDetector 或本地解碼，無需下載任何掃描 library。</p>
           <div class="divider"></div>
-          <label class="image-picker">亦可匯入 QR 截圖（可多選）<input id="image-input" type="file" accept="image/*" multiple></label>
-          <button id="reset-receiver" class="danger">清除接收進度</button>
-          <div class="notice"><strong>鏡頭權限</strong><p>直接開 HTML 能否使用鏡頭視乎瀏覽器政策。建議 Chrome / Edge，並允許鏡頭權限；如被限制，請經 HTTPS 或 localhost 開啟。匯入截圖不需要鏡頭權限。</p></div>
-          <p class="hint">建議從 2–4 QR/s 開始，鏡頭保持正面，QR 連同四邊白邊完整入鏡。模糊或漏段時降低頻率／資料量、增加 QR 尺寸。</p>
+          <label class="image-picker"><span data-i18n="image_picker">亦可匯入 QR 截圖（可多選）</span><input id="image-input" type="file" accept="image/*" multiple></label>
+          <button id="reset-receiver" class="danger" data-i18n="reset_receiver">清除接收進度</button>
+          <div class="notice"><strong data-i18n="notice_title">鏡頭權限</strong><p data-i18n="notice_body">直接開 HTML 能否使用鏡頭視乎瀏覽器政策。建議 Chrome / Edge，並允許鏡頭權限；如被限制，請經 HTTPS 或 localhost 開啟。匯入截圖不需要鏡頭權限。</p></div>
+          <p class="hint" data-i18n="recv_hint">建議從 2–4 QR/s 開始，鏡頭保持正面，QR 連同四邊白邊完整入鏡。模糊或漏段時降低頻率／資料量、增加 QR 尺寸。</p>
         </div>
         <div class="card display-card">
-          <div class="card-heading"><strong>接收畫面</strong><span id="camera-state" class="muted">鏡頭未開啟</span></div>
-          <div class="camera-stage"><video id="video" autoplay playsinline muted hidden></video><div id="camera-placeholder" class="placeholder"><span aria-hidden="true">◎</span><p>開啟鏡頭，對準傳送端</p></div></div>
-          <div class="transfer-info"><strong id="receive-counter">0 / 0 段</strong><span id="receive-percent">0%</span></div>
-          <progress id="receive-progress" value="0" max="1" aria-label="接收進度"></progress>
-          <p id="receive-file" class="file-info">等待第一個 QR</p>
-          <p id="receive-status" class="status" role="status">未接收任何資料。</p>
+          <div class="card-heading"><strong data-i18n="recv_display">接收畫面</strong><span id="camera-state" class="muted" data-i18n="camera_off">鏡頭未開啟</span></div>
+          <div class="camera-stage"><video id="video" autoplay playsinline muted hidden></video><div id="camera-placeholder" class="placeholder"><span aria-hidden="true">◎</span><p data-i18n="camera_placeholder">開啟鏡頭，對準傳送端</p></div></div>
+          <div class="transfer-info"><strong id="receive-counter" data-i18n="recv_counter_init">0 / 0 段</strong><span id="receive-percent">0%</span></div>
+          <progress id="receive-progress" value="0" max="1" data-i18n-aria="recv_progress_aria" aria-label="接收進度"></progress>
+          <p id="receive-file" class="file-info" data-i18n="recv_file_waiting">等待第一個 QR</p>
+          <p id="receive-status" class="status" role="status" data-i18n="recv_status_none">未接收任何資料。</p>
           <p id="missing" class="hint"></p>
-          <a id="download" class="button primary download" hidden>下載檔案</a>
+          <a id="download" class="button primary download" hidden data-i18n="download">下載檔案</a>
         </div>
       </div>
     </section>
-    <footer>OFFLINE BY DESIGN · 沒有帳戶，沒有伺服器，沒有資料上傳。<br>注意：QR 並無加密，任何拍到畫面嘅人都有機會重組檔案。</footer>
+    <footer><span data-i18n="footer_line1">OFFLINE BY DESIGN · 沒有帳戶，沒有伺服器，沒有資料上傳。</span><br><span data-i18n="footer_line2">注意：QR 並無加密，任何拍到畫面嘅人都有機會重組檔案。</span></footer>
   </main>
   <script>/* INLINE_JS */</script>
 </body>

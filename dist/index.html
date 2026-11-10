@@ -8,84 +8,87 @@
   <title>光傳 · Local QR Transfer</title>
   <style>:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#172b36;background:#f3f6f5;font-size:15px;line-height:1.6;--accent:#087e75;--muted:#617580;--border:#dbe4e3}
 *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a.button{border:1px solid var(--border);border-radius:9px;background:white;color:#223c47;padding:9px 16px;cursor:pointer;font-weight:600;text-decoration:none;display:inline-block;text-align:center}button:hover:not(:disabled){border-color:var(--accent);background:#eff9f6}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #74cbbb;outline-offset:3px}.primary,button.primary{background:var(--accent);color:white;border-color:var(--accent)}button.primary:hover:not(:disabled){background:#05665f;color:white}.danger{color:#9c4141;width:100%;margin-top:14px}
-header{max-width:1320px;margin:auto;padding:32px 36px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;gap:16px;align-items:center}.logo{font-size:42px;background:#dfefea;color:var(--accent);border-radius:14px;width:64px;height:64px;text-align:center;line-height:64px}h1{font-size:25px;margin:0;letter-spacing:-.5px}h1 span{font-size:17px;font-weight:500;color:var(--muted);padding-left:8px}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}.local-badge{font-size:11px;letter-spacing:1.5px;color:var(--accent);border:1px solid #bdded3;padding:7px 12px;border-radius:20px;white-space:nowrap}
+header{max-width:1320px;margin:auto;padding:32px 36px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;gap:16px;align-items:center}.logo{font-size:42px;background:#dfefea;color:var(--accent);border-radius:14px;width:64px;height:64px;text-align:center;line-height:64px}h1{font-size:25px;margin:0;letter-spacing:-.5px}h1 span{font-size:17px;font-weight:500;color:var(--muted);padding-left:8px}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}.local-badge{font-size:11px;letter-spacing:1.5px;color:var(--accent);border:1px solid #bdded3;padding:7px 12px;border-radius:20px;white-space:nowrap}.header-actions{display:flex;align-items:center;gap:12px}.lang-toggle{font-size:12px;font-weight:700;letter-spacing:.5px;padding:7px 14px;border-radius:20px;min-width:52px}
 main{max-width:1320px;margin:auto;padding:0 36px}.tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);padding-bottom:16px}.tabs button{background:transparent;border-color:transparent;font-size:16px}.tabs button[aria-pressed=true]{background:#dfefea;color:#05665f}.intro{margin:25px 0 22px}.intro h2{font-size:25px;letter-spacing:-.6px;margin:0 0 5px}.intro p{color:var(--muted);margin:0}.workspace{display:grid;grid-template-columns:335px minmax(0,1fr);gap:22px;align-items:start}.card{background:white;border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 20px #183e3610}.controls{padding:22px}.controls>label,fieldset>label{display:block;font-size:13px;font-weight:600;margin:0 0 12px}label span,legend span{font-size:11px;color:var(--muted);font-weight:400;margin-left:5px}select,input[type=number]{width:100%;display:block;padding:9px 11px;margin-top:6px;color:#263f49;border:1px solid var(--border);border-radius:8px;background:#fbfcfc}input[type=range]{width:100%;margin:0 0 15px;accent-color:var(--accent)}output{float:right;color:var(--accent);font-size:12px;font-weight:600}fieldset{padding:17px 0 0;border:0;border-top:1px solid var(--border);margin:20px 0 0;min-width:0}legend{padding:0 6px 0 0;font-size:12px;font-weight:700}.file-picker{border:1.5px dashed #aacfc3;padding:20px 12px;display:flex!important;align-items:center;flex-direction:column;background:#f5faf8;border-radius:12px;cursor:pointer;text-align:center}.file-picker.dragging{border-color:var(--accent);background:#deefea}.file-picker span{margin:0}.file-picker .file-icon{font-size:28px;color:var(--accent)}.file-picker input{width:100%;font-size:11px;margin-top:12px;color:var(--muted)}.file-info{font-size:12px;overflow-wrap:anywhere;color:var(--muted);margin:12px 0}.actions{display:flex;gap:8px;margin:12px 0 18px}.actions button{flex:1;padding-left:8px;padding-right:8px}.hint{font-size:12px;color:var(--muted);line-height:1.8;margin:12px 0 0}.inline{display:flex;gap:8px;align-items:center}.inline input{min-width:0}.inline button{white-space:nowrap;margin-top:6px}.jump-label{margin-top:12px!important}.display-card{padding:20px;min-width:0}.card-heading{display:flex;align-items:center;justify-content:space-between;font-size:13px;margin-bottom:16px}.card-heading button{font-size:12px;padding:5px 10px}.qr-stage{background:white;min-height:400px;display:flex;align-items:center;justify-content:center;overflow:auto;border:1px solid #edf0ef;border-radius:10px}.qr-stage canvas{display:block;max-width:100%;height:auto;image-rendering:pixelated}.qr-stage:fullscreen{width:100vw;height:100vh;border:0;border-radius:0;background:white;padding:2vmin}.qr-stage:fullscreen canvas{max-width:96vw;max-height:96vh;width:auto;height:auto;object-fit:contain}.placeholder{color:#789087;text-align:center;padding:32px}.placeholder>span{font-size:72px;line-height:1.4;color:#c2d7d0}.placeholder p{font-size:13px}.transfer-info{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:18px 0 8px;font-size:13px}.transfer-info>span{color:var(--muted);font-size:12px}progress{appearance:none;width:100%;height:7px;border:0;border-radius:10px;overflow:hidden;display:block;background:#edf2f0}progress::-webkit-progress-bar{background:#edf2f0}progress::-webkit-progress-value{background:var(--accent);border-radius:10px}progress::-moz-progress-bar{background:var(--accent)}.status{padding:12px 14px;background:#f1f7f4;border-radius:8px;font-size:12px;margin:16px 0 0;overflow-wrap:anywhere;white-space:pre-line}.status.error{background:#fff0ec;color:#9b3d27}.status.success{background:#def4e7;color:#18603f}.camera-stage{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:#152b2b;border-radius:10px;overflow:hidden}.camera-stage video{width:100%;height:100%;object-fit:contain}.camera-stage .placeholder{color:#b2c5be}.camera-stage .placeholder>span{color:#52766b}.muted{color:var(--muted);font-size:12px}.divider{height:1px;background:var(--border);margin:20px 0}.image-picker input{display:block;width:100%;font-size:12px;margin-top:10px}.notice{font-size:12px;border-left:3px solid #d5b976;background:#fbf8ef;padding:12px 14px;margin:20px 0 0}.notice p{margin:5px 0 0;color:#726744}.download{margin-top:15px;width:100%}footer{color:#82958c;font-size:11px;line-height:1.9;text-align:center;margin:30px 0;padding-bottom:25px;letter-spacing:.2px}[hidden]{display:none!important}
 @media(min-width:1500px){.qr-stage{min-height:600px}}@media(max-width:850px){header{padding:22px 18px}.local-badge{display:none}main{padding:0 18px}.workspace{grid-template-columns:1fr}.controls{padding:18px}.display-card{padding:14px}.qr-stage{min-height:280px}.intro h2{font-size:22px}.brand p{font-size:11px}.logo{width:50px;height:50px;line-height:50px;font-size:34px}h1{font-size:23px}h1 span{font-size:14px}.intro p{font-size:13px}}
 </style>
 </head>
 <body>
   <header>
-    <div class="brand"><span class="logo" aria-hidden="true">▦</span><div><h1>光傳 <span>QR Transfer</span></h1><p>一個檔案，一束光。唔經網絡，唔上雲端。</p></div></div>
-    <span class="local-badge">● 100% LOCAL</span>
+    <div class="brand"><span class="logo" aria-hidden="true">▦</span><div><h1>光傳 <span>QR Transfer</span></h1><p data-i18n="tagline">一個檔案，一束光。唔經網絡，唔上雲端。</p></div></div>
+    <div class="header-actions">
+      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="切換語言 / Switch language">EN</button>
+      <span class="local-badge">● 100% LOCAL</span>
+    </div>
   </header>
   <main>
-    <nav aria-label="功能" class="tabs">
-      <button id="send-tab" aria-controls="send-panel" aria-pressed="true">↗ 傳送檔案</button>
-      <button id="receive-tab" aria-controls="receive-panel" aria-pressed="false">↙ 接收檔案</button>
+    <nav data-i18n-aria="nav_label" aria-label="功能" class="tabs">
+      <button id="send-tab" aria-controls="send-panel" aria-pressed="true" data-i18n="send_tab">↗ 傳送檔案</button>
+      <button id="receive-tab" aria-controls="receive-panel" aria-pressed="false" data-i18n="receive_tab">↙ 接收檔案</button>
     </nav>
     <section id="send-panel" aria-labelledby="send-tab">
-      <div class="intro"><h2>將檔案變成動態 QR</h2><p>另一部電腦開啟同一個 HTML，選「接收檔案」，對準螢幕即可。</p></div>
+      <div class="intro"><h2 data-i18n="send_h2">將檔案變成動態 QR</h2><p data-i18n="send_intro">另一部電腦開啟同一個 HTML，選「接收檔案」，對準螢幕即可。</p></div>
       <div class="workspace">
         <div class="controls card">
           <label class="file-picker" id="drop-zone">
             <span class="file-icon" aria-hidden="true">＋</span>
-            <strong>揀選或拖放檔案</strong><span>任何格式 · 最大 64 MiB</span>
+            <strong data-i18n="drop_strong">揀選或拖放檔案</strong><span data-i18n="drop_hint">任何格式 · 最大 64 MiB</span>
             <input id="file-input" type="file">
           </label>
-          <p id="file-info" class="file-info">未選擇檔案</p>
+          <p id="file-info" class="file-info" data-i18n="file_none">未選擇檔案</p>
           <fieldset id="encoding-settings">
-            <legend>編碼設定</legend>
-            <label>每段資料量 <span>較細較易掃描</span><select id="chunk-size"><option value="64">64 bytes</option><option value="128">128 bytes</option><option value="256" selected>256 bytes</option><option value="512">512 bytes</option><option value="768">768 bytes</option><option value="1024">1024 bytes</option></select></label>
-            <label>容錯率 <select id="ecc"><option value="L">L · 約 7%</option><option value="M" selected>M · 約 15%</option><option value="Q">Q · 約 25%</option><option value="H">H · 約 30%</option></select></label>
+            <legend data-i18n="enc_legend">編碼設定</legend>
+            <label><span data-i18n="chunk_label">每段資料量</span> <span data-i18n="chunk_hint">較細較易掃描</span><select id="chunk-size"><option value="64">64 bytes</option><option value="128">128 bytes</option><option value="256" selected>256 bytes</option><option value="512">512 bytes</option><option value="768">768 bytes</option><option value="1024">1024 bytes</option></select></label>
+            <label><span data-i18n="ecc_label">容錯率</span> <select id="ecc"><option value="L" data-i18n="ecc_l">L · 約 7%</option><option value="M" selected data-i18n="ecc_m">M · 約 15%</option><option value="Q" data-i18n="ecc_q">Q · 約 25%</option><option value="H" data-i18n="ecc_h">H · 約 30%</option></select></label>
           </fieldset>
           <fieldset>
-            <legend>播放設定 <span>可即時調整</span></legend>
-            <label for="frequency">切換頻率 <output id="frequency-value">4 QR/s</output></label>
+            <legend><span data-i18n="play_legend">播放設定</span> <span data-i18n="play_hint">可即時調整</span></legend>
+            <label for="frequency"><span data-i18n="freq_label">切換頻率</span> <output id="frequency-value">4 QR/s</output></label>
             <input id="frequency" type="range" min="1" max="15" value="4" step="1">
-            <label for="qr-size">QR 解析度 <output id="qr-size-value">640 px</output></label>
+            <label for="qr-size"><span data-i18n="qrsize_label">QR 解析度</span> <output id="qr-size-value">640 px</output></label>
             <input id="qr-size" type="range" min="256" max="1200" value="640" step="16">
           </fieldset>
-          <div class="actions"><button id="prepare" class="primary" disabled>產生 QR</button><button id="play" disabled>開始播放</button></div>
-          <label class="jump-label">跳到指定段（由 1 開始）<div class="inline"><input id="jump-index" type="number" min="1" value="1" disabled><button id="jump" disabled>跳轉</button></div></label>
-          <p class="hint">QR 會循環播放；接收端會去除重複段。接收端完成後先停止傳送。大型檔案會需要較長時間。</p>
+          <div class="actions"><button id="prepare" class="primary" disabled data-i18n="prepare">產生 QR</button><button id="play" disabled data-i18n="play_start">開始播放</button></div>
+          <label class="jump-label"><span data-i18n="jump_label">跳到指定段（由 1 開始）</span><div class="inline"><input id="jump-index" type="number" min="1" value="1" disabled><button id="jump" disabled data-i18n="jump_btn">跳轉</button></div></label>
+          <p class="hint" data-i18n="send_hint_loop">QR 會循環播放；接收端會去除重複段。接收端完成後先停止傳送。大型檔案會需要較長時間。</p>
         </div>
         <div class="card display-card">
-          <div class="card-heading"><strong>傳送畫面</strong><button id="fullscreen">全螢幕</button></div>
-          <div id="qr-stage" class="qr-stage"><div id="qr-placeholder" class="placeholder"><span aria-hidden="true">▦</span><p>準備好檔案後，QR 會顯示喺呢度</p></div><canvas id="qr-canvas" hidden aria-label="檔案傳送 QR code"></canvas></div>
-          <div class="transfer-info"><strong id="send-counter">等待檔案</strong><span id="send-details">循環傳送 · 自動分段</span></div>
-          <progress id="send-progress" value="0" max="1" aria-label="目前播放段"></progress>
-          <p id="send-status" class="status" role="status">所有處理只會喺呢個瀏覽器進行。</p>
+          <div class="card-heading"><strong data-i18n="send_display">傳送畫面</strong><button id="fullscreen" data-i18n="fullscreen">全螢幕</button></div>
+          <div id="qr-stage" class="qr-stage"><div id="qr-placeholder" class="placeholder"><span aria-hidden="true">▦</span><p data-i18n="qr_placeholder">準備好檔案後，QR 會顯示喺呢度</p></div><canvas id="qr-canvas" hidden data-i18n-aria="qr_canvas_aria" aria-label="檔案傳送 QR code"></canvas></div>
+          <div class="transfer-info"><strong id="send-counter" data-i18n="send_waiting">等待檔案</strong><span id="send-details" data-i18n="send_details_loop">循環傳送 · 自動分段</span></div>
+          <progress id="send-progress" value="0" max="1" data-i18n-aria="send_progress_aria" aria-label="目前播放段"></progress>
+          <p id="send-status" class="status" role="status" data-i18n="send_status_local">所有處理只會喺呢個瀏覽器進行。</p>
         </div>
       </div>
     </section>
     <section id="receive-panel" aria-labelledby="receive-tab" hidden>
-      <div class="intro"><h2>用鏡頭接收檔案</h2><p>對準另一部電腦嘅 QR；即使漏咗幾段，下一輪都會自動補齊。</p></div>
+      <div class="intro"><h2 data-i18n="recv_h2">用鏡頭接收檔案</h2><p data-i18n="recv_intro">對準另一部電腦嘅 QR；即使漏咗幾段，下一輪都會自動補齊。</p></div>
       <div class="workspace">
         <div class="controls card">
-          <label>鏡頭 <select id="camera-select"><option value="">預設鏡頭</option></select></label>
-          <label>鏡頭解析度 <select id="camera-resolution"><option value="1280">1280 × 720</option><option value="1920" selected>1920 × 1080</option><option value="640">640 × 480</option></select></label>
-          <label>掃描方式 <select id="scanner-mode"><option value="auto">自動 · 原生優先</option><option value="local">本地自寫解碼器</option><option value="native">只用瀏覽器原生</option></select></label>
-          <div class="actions"><button id="start-camera" class="primary">開啟鏡頭</button><button id="stop-camera" disabled>停止</button></div>
-          <p id="decoder-info" class="hint">原生 BarcodeDetector 或本地解碼，無需下載任何掃描 library。</p>
+          <label><span data-i18n="camera_label">鏡頭</span> <select id="camera-select"><option value="" data-i18n="default_camera">預設鏡頭</option></select></label>
+          <label><span data-i18n="camera_res_label">鏡頭解析度</span> <select id="camera-resolution"><option value="1280">1280 × 720</option><option value="1920" selected>1920 × 1080</option><option value="640">640 × 480</option></select></label>
+          <label><span data-i18n="scanner_mode_label">掃描方式</span> <select id="scanner-mode"><option value="auto" data-i18n="scan_auto">自動 · 原生優先</option><option value="local" data-i18n="scan_local">本地自寫解碼器</option><option value="native" data-i18n="scan_native">只用瀏覽器原生</option></select></label>
+          <div class="actions"><button id="start-camera" class="primary" data-i18n="start_camera">開啟鏡頭</button><button id="stop-camera" disabled data-i18n="stop_camera">停止</button></div>
+          <p id="decoder-info" class="hint" data-i18n="decoder_info_init">原生 BarcodeDetector 或本地解碼，無需下載任何掃描 library。</p>
           <div class="divider"></div>
-          <label class="image-picker">亦可匯入 QR 截圖（可多選）<input id="image-input" type="file" accept="image/*" multiple></label>
-          <button id="reset-receiver" class="danger">清除接收進度</button>
-          <div class="notice"><strong>鏡頭權限</strong><p>直接開 HTML 能否使用鏡頭視乎瀏覽器政策。建議 Chrome / Edge，並允許鏡頭權限；如被限制，請經 HTTPS 或 localhost 開啟。匯入截圖不需要鏡頭權限。</p></div>
-          <p class="hint">建議從 2–4 QR/s 開始，鏡頭保持正面，QR 連同四邊白邊完整入鏡。模糊或漏段時降低頻率／資料量、增加 QR 尺寸。</p>
+          <label class="image-picker"><span data-i18n="image_picker">亦可匯入 QR 截圖（可多選）</span><input id="image-input" type="file" accept="image/*" multiple></label>
+          <button id="reset-receiver" class="danger" data-i18n="reset_receiver">清除接收進度</button>
+          <div class="notice"><strong data-i18n="notice_title">鏡頭權限</strong><p data-i18n="notice_body">直接開 HTML 能否使用鏡頭視乎瀏覽器政策。建議 Chrome / Edge，並允許鏡頭權限；如被限制，請經 HTTPS 或 localhost 開啟。匯入截圖不需要鏡頭權限。</p></div>
+          <p class="hint" data-i18n="recv_hint">建議從 2–4 QR/s 開始，鏡頭保持正面，QR 連同四邊白邊完整入鏡。模糊或漏段時降低頻率／資料量、增加 QR 尺寸。</p>
         </div>
         <div class="card display-card">
-          <div class="card-heading"><strong>接收畫面</strong><span id="camera-state" class="muted">鏡頭未開啟</span></div>
-          <div class="camera-stage"><video id="video" autoplay playsinline muted hidden></video><div id="camera-placeholder" class="placeholder"><span aria-hidden="true">◎</span><p>開啟鏡頭，對準傳送端</p></div></div>
-          <div class="transfer-info"><strong id="receive-counter">0 / 0 段</strong><span id="receive-percent">0%</span></div>
-          <progress id="receive-progress" value="0" max="1" aria-label="接收進度"></progress>
-          <p id="receive-file" class="file-info">等待第一個 QR</p>
-          <p id="receive-status" class="status" role="status">未接收任何資料。</p>
+          <div class="card-heading"><strong data-i18n="recv_display">接收畫面</strong><span id="camera-state" class="muted" data-i18n="camera_off">鏡頭未開啟</span></div>
+          <div class="camera-stage"><video id="video" autoplay playsinline muted hidden></video><div id="camera-placeholder" class="placeholder"><span aria-hidden="true">◎</span><p data-i18n="camera_placeholder">開啟鏡頭，對準傳送端</p></div></div>
+          <div class="transfer-info"><strong id="receive-counter" data-i18n="recv_counter_init">0 / 0 段</strong><span id="receive-percent">0%</span></div>
+          <progress id="receive-progress" value="0" max="1" data-i18n-aria="recv_progress_aria" aria-label="接收進度"></progress>
+          <p id="receive-file" class="file-info" data-i18n="recv_file_waiting">等待第一個 QR</p>
+          <p id="receive-status" class="status" role="status" data-i18n="recv_status_none">未接收任何資料。</p>
           <p id="missing" class="hint"></p>
-          <a id="download" class="button primary download" hidden>下載檔案</a>
+          <a id="download" class="button primary download" hidden data-i18n="download">下載檔案</a>
         </div>
       </div>
     </section>
-    <footer>OFFLINE BY DESIGN · 沒有帳戶，沒有伺服器，沒有資料上傳。<br>注意：QR 並無加密，任何拍到畫面嘅人都有機會重組檔案。</footer>
+    <footer><span data-i18n="footer_line1">OFFLINE BY DESIGN · 沒有帳戶，沒有伺服器，沒有資料上傳。</span><br><span data-i18n="footer_line2">注意：QR 並無加密，任何拍到畫面嘅人都有機會重組檔案。</span></footer>
   </main>
   <script>/* qrcode license:
 The MIT License (MIT)
@@ -106,6 +109,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 const QRCode = require(1);
 const { decodeImage } = require(24);
 const { MAX_FILE_SIZE, encodeManifest, encodePacket, parsePacket, Receiver, sha256 } = require(25);
+const { t, getLang, setLang, applyStatic } = require(26);
 const $ = id => document.getElementById(id);
 const receiver = new Receiver();
 const scanCanvas = document.createElement('canvas');
@@ -146,7 +150,7 @@ function pauseSender() {
   playing = false;
   clearTimeout(playTimer);
   playTimer = null;
-  $('play').textContent = '開始播放';
+  $('play').textContent = t('play_start');
 }
 
 function selectFile(file) {
@@ -162,10 +166,10 @@ function selectFile(file) {
   $('qr-canvas').hidden = true;
   $('qr-placeholder').hidden = false;
   $('send-progress').value = 0;
-  $('send-counter').textContent = '等待產生 QR';
-  $('send-details').textContent = '循環傳送 · 自動分段';
-  $('file-info').textContent = file ? `${file.name} · ${formatSize(file.size)}` : '未選擇檔案';
-  status('send-status', file && file.size > MAX_FILE_SIZE ? '檔案超過 64 MiB 上限。請選擇較細檔案。' : '揀好編碼設定後，按「產生 QR」。', file && file.size > MAX_FILE_SIZE ? 'error' : '');
+  $('send-counter').textContent = t('send_waiting_generate');
+  $('send-details').textContent = t('send_details_loop');
+  $('file-info').textContent = file ? `${file.name} · ${formatSize(file.size)}` : t('file_none');
+  status('send-status', file && file.size > MAX_FILE_SIZE ? t('file_too_large') : t('send_status_pick_settings'), file && file.size > MAX_FILE_SIZE ? 'error' : '');
 }
 
 function packetAt(index) {
@@ -197,9 +201,10 @@ function renderQR() {
   }
   canvas.hidden = false;
   $('qr-placeholder').hidden = true;
-  $('send-counter').textContent = `第 ${send.index + 1} / ${send.total} 段 · 第 ${send.round} 輪`;
+  $('send-counter').textContent = t('send_counter_segment', send.index + 1, send.total, send.round);
   const seconds = send.total / Number($('frequency').value);
-  $('send-details').textContent = `QR v${qr.version} · ${modules} × ${modules} · 每輪約 ${seconds < 60 ? `${seconds.toFixed(1)} 秒` : `${(seconds / 60).toFixed(1)} 分鐘`}`;
+  const time = seconds < 60 ? t('time_seconds', seconds.toFixed(1)) : t('time_minutes', (seconds / 60).toFixed(1));
+  $('send-details').textContent = t('send_details_qr', qr.version, modules, time);
   $('send-progress').max = send.total;
   $('send-progress').value = send.index + 1;
   $('jump-index').value = send.index + 1;
@@ -217,7 +222,7 @@ function scheduleFrame() {
       scheduleFrame();
     } catch (error) {
       pauseSender();
-      status('send-status', `無法產生 QR：${errorMessage(error)}。請減少每段資料量或降低容錯率。`, 'error');
+      status('send-status', t('qr_fail_generate', errorMessage(error)), 'error');
     }
   }, 1000 / Number($('frequency').value));
 }
@@ -234,7 +239,7 @@ async function prepareSender() {
   $('qr-canvas').hidden = true;
   $('qr-placeholder').hidden = false;
   $('encoding-settings').disabled = true;
-  status('send-status', '正在讀取檔案及計算 SHA-256…');
+  status('send-status', t('reading_hashing'));
   try {
     const bytes = new Uint8Array(await file.arrayBuffer());
     const hash = await sha256(bytes);
@@ -262,11 +267,11 @@ async function prepareSender() {
     $('play').disabled = false;
     $('jump').disabled = false;
     $('jump-index').disabled = false;
-    status('send-status', 'QR 已準備好。接收端開啟鏡頭後，按「開始播放」。');
+    status('send-status', t('qr_ready'));
   } catch (error) {
     if (epoch !== sendEpoch) return;
     send = null;
-    status('send-status', `無法準備檔案：${errorMessage(error)}。如 QR 容量不足，請減少每段資料量、降低容錯率或縮短檔名。`, 'error');
+    status('send-status', t('prepare_fail', errorMessage(error)), 'error');
   } finally {
     if (epoch === sendEpoch) {
       $('prepare').disabled = false;
@@ -276,12 +281,12 @@ async function prepareSender() {
 }
 
 function updateReceiveProgress() {
-  $('receive-counter').textContent = `${receiver.received} / ${receiver.total} 段`;
+  $('receive-counter').textContent = t('receive_counter', receiver.received, receiver.total);
   $('receive-percent').textContent = `${receiver.total ? (receiver.received * 100 / receiver.total).toFixed(1) : '0'}%`;
   $('receive-progress').max = receiver.total || 1;
   $('receive-progress').value = receiver.received;
-  $('receive-file').textContent = receiver.meta ? `${receiver.meta.name} · ${formatSize(receiver.meta.size)}` : '等待第一個 QR';
-  $('missing').textContent = receiver.total && receiver.received < receiver.total ? `尚欠段數：${receiver.missingRanges()}（可於傳送端跳轉）` : '';
+  $('receive-file').textContent = receiver.meta ? `${receiver.meta.name} · ${formatSize(receiver.meta.size)}` : t('recv_file_waiting');
+  $('missing').textContent = receiver.total && receiver.received < receiver.total ? t('missing_segments', receiver.missingRanges()) : '';
 }
 
 function scanMessage(text, kind = '') {
@@ -298,22 +303,22 @@ async function consume(text) {
   try {
     packet = parsePacket(text);
   } catch (error) {
-    scanMessage(`忽略損壞或不支援嘅 QR：${errorMessage(error)}`, 'error');
+    scanMessage(t('ignore_bad_qr', errorMessage(error)), 'error');
     return false;
   }
   if (!packet) return false;
   const result = receiver.accept(packet);
   if (result.foreign) {
-    scanMessage('偵測到另一個傳送。為免混合檔案，已忽略；如要接收新檔案，請先清除接收進度。', 'error');
+    scanMessage(t('foreign_transfer'), 'error');
     return true;
   }
   if (!result.added) return true;
   updateReceiveProgress();
-  status('receive-status', `接收中 · 已讀取 ${formatSize(receiver.bytes)}。遺漏嘅段會喺下一輪補齊。`);
+  status('receive-status', t('receiving', formatSize(receiver.bytes)));
   if (result.complete) {
     finishing = true;
     const epoch = receiveEpoch;
-    status('receive-status', '所有段已收到，正在驗證 SHA-256…');
+    status('receive-status', t('all_received_verify'));
     try {
       const bytes = receiver.assemble();
       const expected = receiver.meta.hash;
@@ -322,7 +327,7 @@ async function consume(text) {
       if (epoch !== receiveEpoch) return true;
       if (hash !== expected) {
         stopCamera();
-        status('receive-status', 'SHA-256 不一致，檔案已拒絕下載。請清除接收進度後重新傳送。', 'error');
+        status('receive-status', t('hash_mismatch'), 'error');
         completed = true;
         return true;
       }
@@ -333,12 +338,12 @@ async function consume(text) {
       $('download').hidden = false;
       completed = true;
       stopCamera();
-      status('receive-status', `接收完成，SHA-256 驗證一致。\n${hash}\n請按「下載檔案」儲存；只開啟可信來源嘅檔案。`, 'success');
+      status('receive-status', t('receive_complete', hash), 'success');
     } catch (error) {
       if (epoch === receiveEpoch) {
         completed = true;
         stopCamera();
-        status('receive-status', `組合檔案失敗：${errorMessage(error)}。請清除接收進度再試。`, 'error');
+        status('receive-status', t('assemble_fail', errorMessage(error)), 'error');
       }
     } finally {
       if (epoch === receiveEpoch) finishing = false;
@@ -357,7 +362,7 @@ function resetReceiver() {
   $('download').hidden = true;
   $('download').removeAttribute('href');
   updateReceiveProgress();
-  status('receive-status', '接收進度已清除，可以接收新檔案。');
+  status('receive-status', t('progress_cleared'));
 }
 
 async function configureDecoder() {
@@ -371,8 +376,8 @@ async function configureDecoder() {
       scanMode = 'native';
     }
   }
-  if (wanted === 'native' && !detector) throw new Error('呢個瀏覽器未提供原生 QR BarcodeDetector。請選「自動」或「本地自寫解碼器」。');
-  $('decoder-info').textContent = scanMode === 'native' ? '目前使用瀏覽器原生 QR 掃描器；所有影像只喺本機處理。' : '目前使用本地自寫 QR 解碼器。請保持鏡頭正面及清晰，建議 2–4 QR/s。';
+  if (wanted === 'native' && !detector) throw new Error(t('native_unavailable'));
+  $('decoder-info').textContent = scanMode === 'native' ? t('decoder_native') : t('decoder_local');
 }
 
 function drawScanSource(source, width, height) {
@@ -406,10 +411,10 @@ async function scanFrame(epoch) {
     if (scanMode === 'native' && $('scanner-mode').value === 'auto') {
       detector = null;
       scanMode = 'local';
-      $('decoder-info').textContent = `原生掃描失敗，已切換本地解碼器：${errorMessage(error)}`;
+      $('decoder-info').textContent = t('native_fail_switch', errorMessage(error));
     } else {
       stopCamera();
-      status('receive-status', `掃描失敗：${errorMessage(error)}`, 'error');
+      status('receive-status', t('scan_fail', errorMessage(error)), 'error');
     }
   } finally {
     if (stream && epoch === cameraEpoch) scanTimer = setTimeout(() => scanFrame(epoch), 60);
@@ -429,13 +434,13 @@ function stopCamera() {
   $('camera-select').disabled = false;
   $('camera-resolution').disabled = false;
   $('scanner-mode').disabled = false;
-  $('camera-state').textContent = '鏡頭未開啟';
+  $('camera-state').textContent = t('camera_off');
 }
 
 async function startCamera() {
   stopCamera();
   if (completed) {
-    status('receive-status', '上一個接收已完成或已拒絕。請先下載檔案或清除接收進度，再開啟新接收。');
+    status('receive-status', t('prev_receive_done'));
     return;
   }
   const epoch = cameraEpoch;
@@ -443,10 +448,10 @@ async function startCamera() {
   $('camera-select').disabled = true;
   $('camera-resolution').disabled = true;
   $('scanner-mode').disabled = true;
-  status('receive-status', '正在要求鏡頭權限…');
+  status('receive-status', t('requesting_camera'));
   try {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      throw new Error('目前環境無法使用 camera API。請改用支援鏡頭嘅 Chrome / Edge，並經 HTTPS／localhost 開啟，或匯入 QR 截圖。');
+      throw new Error(t('camera_api_unavailable'));
     }
     await configureDecoder();
     if (epoch !== cameraEpoch) return;
@@ -472,27 +477,27 @@ async function startCamera() {
     $('stop-camera').disabled = false;
     const track = stream.getVideoTracks()[0];
     const settings = track.getSettings();
-    $('camera-state').textContent = `${settings.width || '?'} × ${settings.height || '?'}`;
+    $('camera-state').textContent = t('camera_state_res', settings.width || '?', settings.height || '?');
     track.addEventListener('ended', () => {
       if (epoch === cameraEpoch) {
         stopCamera();
-        status('receive-status', '鏡頭已中斷；接收進度仍保留，可以重新開啟鏡頭。', 'error');
+        status('receive-status', t('camera_interrupted'), 'error');
       }
     });
-    status('receive-status', '鏡頭已開啟，請對準傳送端 QR。');
+    status('receive-status', t('camera_opened'));
     scanFrame(epoch);
     const devices = await navigator.mediaDevices.enumerateDevices();
     if (epoch !== cameraEpoch) return;
-    $('camera-select').replaceChildren(new Option('預設鏡頭', ''));
+    $('camera-select').replaceChildren(new Option(t('default_camera'), ''));
     for (const device of devices.filter(item => item.kind === 'videoinput')) {
-      $('camera-select').add(new Option(device.label || `鏡頭 ${$('camera-select').length}`, device.deviceId));
+      $('camera-select').add(new Option(device.label || t('camera_n', $('camera-select').length), device.deviceId));
     }
     $('camera-select').value = settings.deviceId || '';
   } catch (error) {
     if (epoch !== cameraEpoch) return;
     stopCamera();
-    const hint = error.name === 'NotAllowedError' ? '請允許鏡頭權限；如直接開 HTML 被封鎖，請改經 HTTPS／localhost 開啟。' : '';
-    status('receive-status', `無法開啟鏡頭：${errorMessage(error)} ${hint}`, 'error');
+    const hint = error.name === 'NotAllowedError' ? t('camera_permission_hint') : '';
+    status('receive-status', t('camera_open_fail', errorMessage(error), hint), 'error');
   }
 }
 
@@ -507,10 +512,10 @@ async function importImages(files) {
     let found = 0;
     for (const file of files) {
       if (epoch !== receiveEpoch || completed) break;
-      if (file.size > 32 * 1024 * 1024) throw new Error(`圖片 ${file.name} 超過 32 MiB 上限。`);
+      if (file.size > 32 * 1024 * 1024) throw new Error(t('image_too_large', file.name));
       const image = await createImageBitmap(file);
       try {
-        if (image.width * image.height > 32 * 1024 * 1024) throw new Error('圖片解析度過大，請先裁剪 QR 範圍。');
+        if (image.width * image.height > 32 * 1024 * 1024) throw new Error(t('image_resolution_large'));
         drawScanSource(image, image.width, image.height);
         const texts = await readCanvas();
         if (epoch !== receiveEpoch) break;
@@ -520,10 +525,10 @@ async function importImages(files) {
       }
     }
     if (epoch === receiveEpoch && !completed && !finishing && found === 0) {
-      status('receive-status', '未能讀到有效傳送 QR。請確認圖片完整、清晰，並保留 QR 白邊。', 'error');
+      status('receive-status', t('no_valid_qr'), 'error');
     }
   } catch (error) {
-    if (epoch === receiveEpoch) status('receive-status', `匯入圖片失敗：${errorMessage(error)}`, 'error');
+    if (epoch === receiveEpoch) status('receive-status', t('import_fail', errorMessage(error)), 'error');
   } finally {
     $('image-input').disabled = false;
     $('image-input').value = '';
@@ -561,25 +566,25 @@ $('play').addEventListener('click', () => {
   if (playing) pauseSender();
   else {
     playing = true;
-    $('play').textContent = '暫停播放';
-    status('send-status', '循環播放中；呢度唔會知道對方是否收齊，請留意接收端進度。');
+    $('play').textContent = t('play_pause');
+    status('send-status', t('loop_playing'));
     scheduleFrame();
   }
 });
 $('frequency').addEventListener('input', () => {
-  $('frequency-value').textContent = `${$('frequency').value} QR/s`;
+  $('frequency-value').textContent = t('freq_unit', $('frequency').value);
   if (send) renderQR();
   scheduleFrame();
 });
 $('qr-size').addEventListener('input', () => {
-  $('qr-size-value').textContent = `${$('qr-size').value} px`;
+  $('qr-size-value').textContent = t('px_unit', $('qr-size').value);
   if (send) renderQR();
 });
 $('jump').addEventListener('click', () => {
   if (!send) return;
   const index = Number($('jump-index').value);
   if (!Number.isInteger(index) || index < 1 || index > send.total) {
-    status('send-status', `請輸入 1 至 ${send.total} 嘅整數。`, 'error');
+    status('send-status', t('jump_range', send.total), 'error');
     return;
   }
   send.index = index - 1;
@@ -590,15 +595,15 @@ $('fullscreen').addEventListener('click', async () => {
   try {
     if (document.fullscreenElement) await document.exitFullscreen();
     else if ($('qr-stage').requestFullscreen) await $('qr-stage').requestFullscreen();
-    else status('send-status', '呢個瀏覽器未提供全螢幕功能，請用瀏覽器全螢幕模式。', 'error');
+    else status('send-status', t('fullscreen_unavailable'), 'error');
   } catch (error) {
-    status('send-status', `無法進入全螢幕：${errorMessage(error)}`, 'error');
+    status('send-status', t('fullscreen_fail', errorMessage(error)), 'error');
   }
 });
 $('start-camera').addEventListener('click', startCamera);
 $('stop-camera').addEventListener('click', stopCamera);
 $('reset-receiver').addEventListener('click', () => {
-  if (receiver.received && !globalThis.confirm('清除所有已接收資料及下載連結？')) return;
+  if (receiver.received && !globalThis.confirm(t('confirm_clear'))) return;
   resetReceiver();
 });
 $('image-input').addEventListener('change', event => importImages(Array.from(event.target.files)));
@@ -610,6 +615,27 @@ window.addEventListener('pagehide', () => {
   pauseSender();
   stopCamera();
   if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+});
+
+// Re-render dynamic strings (progress, unit labels, counters) after a language switch.
+function refreshDynamic() {
+  $('frequency-value').textContent = t('freq_unit', $('frequency').value);
+  $('qr-size-value').textContent = t('px_unit', $('qr-size').value);
+  updateReceiveProgress();
+  if (!send) {
+    const file = $('file-input').files[0];
+    $('file-info').textContent = file ? `${file.name} · ${formatSize(file.size)}` : t('file_none');
+    $('send-counter').textContent = t('send_waiting_generate');
+    $('send-details').textContent = t('send_details_loop');
+  }
+  $('play').textContent = playing ? t('play_pause') : t('play_start');
+}
+
+// Language toggle: zh <-> en, persisted and applied to the whole page.
+applyStatic();
+refreshDynamic();
+$('lang-toggle').addEventListener('click', () => {
+  setLang(getLang() === 'zh' ? 'en' : 'zh', refreshDynamic);
 });
 
 },
@@ -3913,6 +3939,300 @@ module.exports = {
   MAX_FILE_SIZE, toBase64, fromBase64, crc32, encodeManifest, encodePacket,
   parsePacket, Receiver, sha256, sha256Local
 };
+
+},
+function(module,exports,require){
+'use strict';
+
+// All user-facing strings, in Traditional Chinese (zh) and English (en).
+// Values are either a plain string or a function returning a string.
+// This module is bundled into the single self-contained HTML by scripts/build.js.
+
+const STRINGS = {
+  zh: {
+    // document / chrome
+    doc_title: '光傳 · Local QR Transfer',
+    html_lang: 'zh-Hant',
+    lang_toggle: 'EN',
+    lang_toggle_aria: '切換語言 / Switch language',
+    tagline: '一個檔案，一束光。唔經網絡，唔上雲端。',
+    nav_label: '功能',
+    send_tab: '↗ 傳送檔案',
+    receive_tab: '↙ 接收檔案',
+    // send panel
+    send_h2: '將檔案變成動態 QR',
+    send_intro: '另一部電腦開啟同一個 HTML，選「接收檔案」，對準螢幕即可。',
+    drop_strong: '揀選或拖放檔案',
+    drop_hint: '任何格式 · 最大 64 MiB',
+    file_none: '未選擇檔案',
+    enc_legend: '編碼設定',
+    chunk_label: '每段資料量',
+    chunk_hint: '較細較易掃描',
+    ecc_label: '容錯率',
+    ecc_l: 'L · 約 7%',
+    ecc_m: 'M · 約 15%',
+    ecc_q: 'Q · 約 25%',
+    ecc_h: 'H · 約 30%',
+    play_legend: '播放設定',
+    play_hint: '可即時調整',
+    freq_label: '切換頻率',
+    qrsize_label: 'QR 解析度',
+    prepare: '產生 QR',
+    play_start: '開始播放',
+    play_pause: '暫停播放',
+    jump_label: '跳到指定段（由 1 開始）',
+    jump_btn: '跳轉',
+    send_hint_loop: 'QR 會循環播放；接收端會去除重複段。接收端完成後先停止傳送。大型檔案會需要較長時間。',
+    send_display: '傳送畫面',
+    fullscreen: '全螢幕',
+    qr_placeholder: '準備好檔案後，QR 會顯示喺呢度',
+    qr_canvas_aria: '檔案傳送 QR code',
+    send_waiting: '等待檔案',
+    send_waiting_generate: '等待產生 QR',
+    send_details_loop: '循環傳送 · 自動分段',
+    send_progress_aria: '目前播放段',
+    send_status_local: '所有處理只會喺呢個瀏覽器進行。',
+    // receive panel
+    recv_h2: '用鏡頭接收檔案',
+    recv_intro: '對準另一部電腦嘅 QR；即使漏咗幾段，下一輪都會自動補齊。',
+    camera_label: '鏡頭',
+    default_camera: '預設鏡頭',
+    camera_res_label: '鏡頭解析度',
+    scanner_mode_label: '掃描方式',
+    scan_auto: '自動 · 原生優先',
+    scan_local: '本地自寫解碼器',
+    scan_native: '只用瀏覽器原生',
+    start_camera: '開啟鏡頭',
+    stop_camera: '停止',
+    decoder_info_init: '原生 BarcodeDetector 或本地解碼，無需下載任何掃描 library。',
+    image_picker: '亦可匯入 QR 截圖（可多選）',
+    reset_receiver: '清除接收進度',
+    notice_title: '鏡頭權限',
+    notice_body: '直接開 HTML 能否使用鏡頭視乎瀏覽器政策。建議 Chrome / Edge，並允許鏡頭權限；如被限制，請經 HTTPS 或 localhost 開啟。匯入截圖不需要鏡頭權限。',
+    recv_hint: '建議從 2–4 QR/s 開始，鏡頭保持正面，QR 連同四邊白邊完整入鏡。模糊或漏段時降低頻率／資料量、增加 QR 尺寸。',
+    recv_display: '接收畫面',
+    camera_off: '鏡頭未開啟',
+    camera_placeholder: '開啟鏡頭，對準傳送端',
+    recv_counter_init: '0 / 0 段',
+    recv_progress_aria: '接收進度',
+    recv_file_waiting: '等待第一個 QR',
+    recv_status_none: '未接收任何資料。',
+    download: '下載檔案',
+    footer_line1: 'OFFLINE BY DESIGN · 沒有帳戶，沒有伺服器，沒有資料上傳。',
+    footer_line2: '注意：QR 並無加密，任何拍到畫面嘅人都有機會重組檔案。',
+    // dynamic
+    file_too_large: '檔案超過 64 MiB 上限。請選擇較細檔案。',
+    send_status_pick_settings: '揀好編碼設定後，按「產生 QR」。',
+    send_counter_segment: (i, total, round) => `第 ${i} / ${total} 段 · 第 ${round} 輪`,
+    time_seconds: s => `${s} 秒`,
+    time_minutes: m => `${m} 分鐘`,
+    send_details_qr: (version, modules, time) => `QR v${version} · ${modules} × ${modules} · 每輪約 ${time}`,
+    qr_fail_generate: e => `無法產生 QR：${e}。請減少每段資料量或降低容錯率。`,
+    reading_hashing: '正在讀取檔案及計算 SHA-256…',
+    qr_ready: 'QR 已準備好。接收端開啟鏡頭後，按「開始播放」。',
+    prepare_fail: e => `無法準備檔案：${e}。如 QR 容量不足，請減少每段資料量、降低容錯率或縮短檔名。`,
+    receive_counter: (recv, total) => `${recv} / ${total} 段`,
+    missing_segments: ranges => `尚欠段數：${ranges}（可於傳送端跳轉）`,
+    ignore_bad_qr: e => `忽略損壞或不支援嘅 QR：${e}`,
+    foreign_transfer: '偵測到另一個傳送。為免混合檔案，已忽略；如要接收新檔案，請先清除接收進度。',
+    receiving: size => `接收中 · 已讀取 ${size}。遺漏嘅段會喺下一輪補齊。`,
+    all_received_verify: '所有段已收到，正在驗證 SHA-256…',
+    hash_mismatch: 'SHA-256 不一致，檔案已拒絕下載。請清除接收進度後重新傳送。',
+    receive_complete: hash => `接收完成，SHA-256 驗證一致。\n${hash}\n請按「下載檔案」儲存；只開啟可信來源嘅檔案。`,
+    assemble_fail: e => `組合檔案失敗：${e}。請清除接收進度再試。`,
+    progress_cleared: '接收進度已清除，可以接收新檔案。',
+    native_unavailable: '呢個瀏覽器未提供原生 QR BarcodeDetector。請選「自動」或「本地自寫解碼器」。',
+    decoder_native: '目前使用瀏覽器原生 QR 掃描器；所有影像只喺本機處理。',
+    decoder_local: '目前使用本地自寫 QR 解碼器。請保持鏡頭正面及清晰，建議 2–4 QR/s。',
+    native_fail_switch: e => `原生掃描失敗，已切換本地解碼器：${e}`,
+    scan_fail: e => `掃描失敗：${e}`,
+    prev_receive_done: '上一個接收已完成或已拒絕。請先下載檔案或清除接收進度，再開啟新接收。',
+    requesting_camera: '正在要求鏡頭權限…',
+    camera_api_unavailable: '目前環境無法使用 camera API。請改用支援鏡頭嘅 Chrome / Edge，並經 HTTPS／localhost 開啟，或匯入 QR 截圖。',
+    camera_interrupted: '鏡頭已中斷；接收進度仍保留，可以重新開啟鏡頭。',
+    camera_n: n => `鏡頭 ${n}`,
+    camera_permission_hint: '請允許鏡頭權限；如直接開 HTML 被封鎖，請改經 HTTPS／localhost 開啟。',
+    camera_open_fail: (e, hint) => `無法開啟鏡頭：${e} ${hint}`,
+    camera_opened: '鏡頭已開啟，請對準傳送端 QR。',
+    image_too_large: name => `圖片 ${name} 超過 32 MiB 上限。`,
+    image_resolution_large: '圖片解析度過大，請先裁剪 QR 範圍。',
+    no_valid_qr: '未能讀到有效傳送 QR。請確認圖片完整、清晰，並保留 QR 白邊。',
+    import_fail: e => `匯入圖片失敗：${e}`,
+    loop_playing: '循環播放中；呢度唔會知道對方是否收齊，請留意接收端進度。',
+    jump_range: total => `請輸入 1 至 ${total} 嘅整數。`,
+    fullscreen_unavailable: '呢個瀏覽器未提供全螢幕功能，請用瀏覽器全螢幕模式。',
+    fullscreen_fail: e => `無法進入全螢幕：${e}`,
+    confirm_clear: '清除所有已接收資料及下載連結？'
+  },
+  en: {
+    doc_title: 'Local QR Transfer · 光傳',
+    html_lang: 'en',
+    lang_toggle: '中文',
+    lang_toggle_aria: '切換語言 / Switch language',
+    tagline: 'One file, one beam of light. No network, no cloud.',
+    nav_label: 'Features',
+    send_tab: '↗ Send file',
+    receive_tab: '↙ Receive file',
+    send_h2: 'Turn a file into animated QR',
+    send_intro: 'Open the same HTML on another computer, choose “Receive file,” and point it at the screen.',
+    drop_strong: 'Choose or drop a file',
+    drop_hint: 'Any format · up to 64 MiB',
+    file_none: 'No file selected',
+    enc_legend: 'Encoding settings',
+    chunk_label: 'Bytes per segment',
+    chunk_hint: 'smaller scans easier',
+    ecc_label: 'Error correction',
+    ecc_l: 'L · ~7%',
+    ecc_m: 'M · ~15%',
+    ecc_q: 'Q · ~25%',
+    ecc_h: 'H · ~30%',
+    play_legend: 'Playback settings',
+    play_hint: 'adjustable live',
+    freq_label: 'Switch rate',
+    qrsize_label: 'QR resolution',
+    prepare: 'Generate QR',
+    play_start: 'Start playing',
+    play_pause: 'Pause',
+    jump_label: 'Jump to segment (from 1)',
+    jump_btn: 'Jump',
+    send_hint_loop: 'The QR loops; the receiver drops duplicate segments. Stop sending only after the receiver finishes. Large files take longer.',
+    send_display: 'Transmission screen',
+    fullscreen: 'Fullscreen',
+    qr_placeholder: 'Once a file is ready, the QR appears here',
+    qr_canvas_aria: 'File transfer QR code',
+    send_waiting: 'Waiting for file',
+    send_waiting_generate: 'Waiting to generate QR',
+    send_details_loop: 'Loop transfer · auto-segmented',
+    send_progress_aria: 'Current segment',
+    send_status_local: 'All processing happens in this browser only.',
+    recv_h2: 'Receive a file with the camera',
+    recv_intro: 'Aim at the other computer’s QR; missed segments are filled in on the next loop.',
+    camera_label: 'Camera',
+    default_camera: 'Default camera',
+    camera_res_label: 'Camera resolution',
+    scanner_mode_label: 'Scan method',
+    scan_auto: 'Auto · native first',
+    scan_local: 'Built-in local decoder',
+    scan_native: 'Browser native only',
+    start_camera: 'Open camera',
+    stop_camera: 'Stop',
+    decoder_info_init: 'Native BarcodeDetector or local decoding — no scanner library to download.',
+    image_picker: 'Or import QR screenshots (multiple allowed)',
+    reset_receiver: 'Clear receive progress',
+    notice_title: 'Camera permission',
+    notice_body: 'Whether a directly-opened HTML can use the camera depends on browser policy. Chrome / Edge are recommended; allow camera permission. If blocked, open via HTTPS or localhost. Importing screenshots needs no camera permission.',
+    recv_hint: 'Start around 2–4 QR/s, keep the camera square-on, and frame the whole QR including its white border. If blurry or dropping segments, lower the rate/bytes or increase QR size.',
+    recv_display: 'Receive screen',
+    camera_off: 'Camera off',
+    camera_placeholder: 'Open the camera and aim at the sender',
+    recv_counter_init: '0 / 0 segments',
+    recv_progress_aria: 'Receive progress',
+    recv_file_waiting: 'Waiting for the first QR',
+    recv_status_none: 'No data received yet.',
+    download: 'Download file',
+    footer_line1: 'OFFLINE BY DESIGN · no account, no server, no upload.',
+    footer_line2: 'Note: QR codes are not encrypted; anyone who captures the screen may reconstruct the file.',
+    file_too_large: 'File exceeds the 64 MiB limit. Choose a smaller file.',
+    send_status_pick_settings: 'Choose encoding settings, then press Generate QR.',
+    send_counter_segment: (i, total, round) => `Segment ${i} / ${total} · round ${round}`,
+    time_seconds: s => `${s}s`,
+    time_minutes: m => `${m} min`,
+    send_details_qr: (version, modules, time) => `QR v${version} · ${modules} × ${modules} · ~${time}/loop`,
+    qr_fail_generate: e => `Could not generate QR: ${e}. Reduce bytes per segment or lower error correction.`,
+    reading_hashing: 'Reading file and computing SHA-256…',
+    qr_ready: 'QR is ready. After the receiver opens its camera, press Start playing.',
+    prepare_fail: e => `Could not prepare file: ${e}. If the QR is too small, reduce bytes per segment, lower error correction, or shorten the file name.`,
+    receive_counter: (recv, total) => `${recv} / ${total} segments`,
+    missing_segments: ranges => `Missing segments: ${ranges} (jump to them on the sender)`,
+    ignore_bad_qr: e => `Ignoring a damaged or unsupported QR: ${e}`,
+    foreign_transfer: 'Detected a different transfer. Ignored to avoid mixing files; clear receive progress to accept a new file.',
+    receiving: size => `Receiving · ${size} read. Missed segments fill in next loop.`,
+    all_received_verify: 'All segments received, verifying SHA-256…',
+    hash_mismatch: 'SHA-256 mismatch; download refused. Clear receive progress and resend.',
+    receive_complete: hash => `Received and SHA-256 verified.\n${hash}\nPress Download file to save; only open files from trusted sources.`,
+    assemble_fail: e => `Failed to assemble the file: ${e}. Clear receive progress and try again.`,
+    progress_cleared: 'Receive progress cleared; ready for a new file.',
+    native_unavailable: 'This browser has no native QR BarcodeDetector. Choose Auto or the built-in local decoder.',
+    decoder_native: 'Using the browser’s native QR scanner; all images are processed locally.',
+    decoder_local: 'Using the built-in local QR decoder. Keep the camera square-on and clear; 2–4 QR/s recommended.',
+    native_fail_switch: e => `Native scanning failed; switched to the local decoder: ${e}`,
+    scan_fail: e => `Scan failed: ${e}`,
+    prev_receive_done: 'The previous receive finished or was refused. Download the file or clear receive progress before starting a new one.',
+    requesting_camera: 'Requesting camera permission…',
+    camera_api_unavailable: 'The camera API is unavailable here. Use a camera-capable Chrome / Edge over HTTPS/localhost, or import QR screenshots.',
+    camera_interrupted: 'Camera interrupted; receive progress is kept — you can reopen the camera.',
+    camera_n: n => `Camera ${n}`,
+    camera_permission_hint: 'Allow camera permission; if a directly-opened HTML is blocked, use HTTPS/localhost.',
+    camera_open_fail: (e, hint) => `Could not open the camera: ${e} ${hint}`,
+    camera_opened: 'Camera on; aim at the sender’s QR.',
+    image_too_large: name => `Image ${name} exceeds the 32 MiB limit.`,
+    image_resolution_large: 'Image resolution too large; crop to the QR area first.',
+    no_valid_qr: 'No valid transfer QR found. Make sure the image is complete, sharp, and keeps the QR’s white border.',
+    import_fail: e => `Image import failed: ${e}`,
+    loop_playing: 'Looping; this side can’t tell if the other finished — watch the receiver’s progress.',
+    jump_range: total => `Enter an integer from 1 to ${total}.`,
+    fullscreen_unavailable: 'This browser has no fullscreen API; use the browser’s fullscreen mode.',
+    fullscreen_fail: e => `Could not enter fullscreen: ${e}`,
+    confirm_clear: 'Clear all received data and the download link?'
+  }
+};
+
+// Units shared across languages.
+const SHARED = {
+  freq_unit: v => `${v} QR/s`,
+  px_unit: v => `${v} px`,
+  camera_state_res: (w, h) => `${w} × ${h}`
+};
+
+const STORAGE_KEY = 'qr-lang';
+
+function readStoredLang() {
+  try {
+    const stored = globalThis.localStorage && globalThis.localStorage.getItem(STORAGE_KEY);
+    if (stored === 'zh' || stored === 'en') return stored;
+  } catch (_) { /* file:// may block storage */ }
+  // First visit: honour an English browser, otherwise default to Traditional Chinese.
+  const nav = (globalThis.navigator && globalThis.navigator.language || '').toLowerCase();
+  return nav.startsWith('en') ? 'en' : 'zh';
+}
+
+let lang = readStoredLang();
+
+function getLang() {
+  return lang;
+}
+
+function t(key, ...args) {
+  const table = STRINGS[lang] || STRINGS.zh;
+  let value = table[key];
+  if (value === undefined) value = SHARED[key];
+  if (value === undefined) return key;
+  return typeof value === 'function' ? value(...args) : value;
+}
+
+// Apply every data-i18n* attribute in the document to the current language.
+function applyStatic(root = document) {
+  root.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+  root.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
+  document.title = t('doc_title');
+  document.documentElement.setAttribute('lang', t('html_lang'));
+  const toggle = document.getElementById('lang-toggle');
+  if (toggle) {
+    toggle.textContent = t('lang_toggle');
+    toggle.setAttribute('aria-label', t('lang_toggle_aria'));
+  }
+}
+
+function setLang(next, onChange) {
+  lang = (next === 'en') ? 'en' : 'zh';
+  try {
+    if (globalThis.localStorage) globalThis.localStorage.setItem(STORAGE_KEY, lang);
+  } catch (_) { /* ignore */ }
+  applyStatic();
+  if (typeof onChange === 'function') onChange(lang);
+}
+
+module.exports = { t, getLang, setLang, applyStatic };
 
 }];const cache={};function require(id){if(cache[id])return cache[id].exports;const module=cache[id]={exports:{}};modules[id](module,module.exports,require);return module.exports;}require(0);})();</script>
 </body>
