@@ -1,5 +1,11 @@
 # 光傳 · Local QR Transfer
 
+## Screenshots
+
+| Send file · 傳送檔案 | Receive file · 接收檔案 |
+| :---: | :---: |
+| ![Send file page](docs/screenshots/01-send-file.png) | ![Receive file page](docs/screenshots/02-receive-file.png) |
+
 ## English
 
 Transfer a file between two computers using a sequence of QR codes. The app runs entirely in the browser: there is no backend, account, network connection, or CDN required for the transfer.
