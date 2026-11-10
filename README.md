@@ -97,6 +97,10 @@ npm.cmd run build
 
 `src/app.js` handles the interface, camera, playback, and download. `src/protocol.js` handles packetization, validation, and reassembly. `src/qr-decoder.js` is the local QR decoder. `scripts/build.js` bundles the required modules, styles, and page into one HTML file and includes the `qrcode` MIT license text.
 
+### License
+
+This project is licensed under the [MIT License](LICENSE). The bundled `qrcode` dependency is also MIT licensed, and its license text is included in the built HTML.
+
 ## 繁體中文
 
 透過連續 QR code 將檔案由一部電腦傳送到另一部。應用程式完全在瀏覽器內運行；傳輸不需要後端、帳戶、網絡連線或 CDN。
@@ -184,3 +188,7 @@ npm.cmd run build
 ```
 
 `src/app.js` 負責介面、鏡頭、播放及下載；`src/protocol.js` 負責分段、驗證及重組；`src/qr-decoder.js` 是本地 QR 解碼器。`scripts/build.js` 會將所需模組、樣式及頁面包成單一 HTML，並附上 `qrcode` 的 MIT 授權文字。
+
+### 授權
+
+本專案採用 [MIT 授權條款](LICENSE)。所依賴的 `qrcode` 套件同樣為 MIT 授權，其授權文字已包含在建置後的 HTML 內。
